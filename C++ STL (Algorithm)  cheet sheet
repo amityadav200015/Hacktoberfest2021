@@ -1,0 +1,168 @@
+algorithm      sort, reverse, max, min, sum, count, find, binary serach, lower bound, upper bound, next permutation, prev permutation, COMPRATOR
+
+SORTING->  3 kind of sort   learn merge sort (n log n)
+array=  sort(arr,arr+n);   FOR DECENDING  ORDER  sort(arr,arr+n, greater<int>); inbuilt function
+	sort(arr+1, arr+3);
+
+vector= (arr,arr+n)
+	sort(v.begin()+1, s.begin()+4);  for particular range to sort
+
+REVERSE->
+
+array=  reverse(arr,arr+n);
+ 	reverse(arr+1,arr+4);
+vecior= reverse(v.begin(),v.end()); 
+ 	reverse(v.begin()+1, v.begin()+4);
+
+MAX ELEMENT->
+		*max_element(arr,arr+n);
+		*max_element(v.begin(),v.end()); 
+
+if * not given it will return iterator otherwise returns max value of container value 
+
+MIN ELEMENT-> 
+		*min_element(arr,arr+n);
+		*min_element(v.begin(),v.end()); 
+
+
+
+SUM of elements->
+		int sum=accumulate(arr,arr+n, 10);   here 10 is initial sum you can avoid
+		int sum=accumulate(v.begin(),v.end(), 10);
+
+
+COUNT-> 
+	int cnt= count(arr,arr+n,1)  count the 1  O(n) complixity
+	int cnt= count(v.begin(),v.end(),1);
+
+
+first occurance of 2 in arr={1,2,5,2,4,3}->
+	auto it = find(arr,arr+n, 2)  return an iterator
+				pointing to the first instance of 2 or elese it returns
+				 pointing to the end() if it is not there.
+
+* it - v.begin();  returns index value.
+
+
+BINARY SEARCH-> only work in sorted array  LOG N complixity    find has more time complixity
+		binary_serach(first iterator,last iterator,x);
+		returns true or false
+		boo res = binary_search(arr,arr+n, 8);
+		bool res = binary_search(v.begin(),v.end(),8);
+
+LOWER BOUND FUNCTION->   log N
+		returns an iterator pointing toa an element which is not less than x
+		array to be sorted
+		{1,5,7,7,8,10,10,10,11,11,12}
+		if x=10   returns first 10
+		if x=6   returns 7
+		if x=13 returns end()
+		auto it= lower_bound(arr,arr+n, x);
+		index= it-arr;
+		auto it= lower_bound(v.begin(),v.end(),x);
+		int index = it-v.begin();
+
+
+UPPER BOUND FUNCTION->
+		returns an iterator which points to an element which is just greater
+		than x
+		sorted array
+		{1,5,7,7,8,10,10,10,11,11,12}
+		if x=7   returns first 8  (just greater)
+		if x=6    returns first 7
+		if x=12   returns end() iterator
+		if x=15   returns end()
+		upper_bound(arr,arr+n, x);
+		index= it-arr;
+		auto it= upper_bound(v.begin(),v.end(),x);
+		int index = it-v.begin();
+
+//Q. find me the first index where the element x lies
+  ans=   
+ 1 method
+ if(binary_search(arr,arr+n,x)==true){
+	cout<<lower_bound(arr,arr+n, x)-arr;
+	}
+  else{
+	cout<<"does not exists";
+	}
+
+ 2 method
+
+	int index = lower_bound(arr,arr+n, x)- arr;
+if(index!= n && arr[index]==x){
+	cout<<found it:<< index;}
+else{
+cout<<does not exists;}
+
+
+Q. find the last occurance of x in an arr
+
+arr= {1,5,7,7,8,10,10,10,11,11,12} sorted order
+ans = 
+	int index = upper_bound(arr,arr+n,x)-arr;  //gives index of first 11;
+	then subtract index by 1.  ie at last 10 index
+	if(index>=0 && arr[index]==x){   if index becomes negative will give run timee error
+	cout<<last occurance<< index;}
+	else{
+	cout<<does not exists;   }
+
+
+Q. tell me the number of time the x appear in array
+	arr= {1,5,7,7,8,10,10,10,11,11,12} sorted order
+	if x=10  ans =3
+	if x=7 ans=2
+ANS =  upper_bound - lower_bound    complixity becomes 2*log n
+    if difference comes 0  then does not exists  as upper and lower bound points to same index
+
+
+
+NEXT PERMUTATION ->  O(N) complixity
+ permutation (all combination)  ex- (abc,acb,bac,bca,cab,cba)  (sorted order)
+no.of permutation  = n! .
+stirng = "bca"
+bool res = next_permutation(s.begin(),s.end());  //returns next permutation ie "cab" from above example.
+
+if string = "cba"  as there is no next permutation  so the bool response will be false.
+
+Q. if any random string given say "bac" find all possible pr=ermutaton ?
+ ANS- first sort the string  it will make the string "abc"    *in interview use recursive way
+	then....
+		do{
+		   cout<<s<<endl;
+		}while(next_permutation(s.begin(), s.end()));   jab tak true hai tab tak chalega
+
+PREV PERMUTATION -> same as above but in reverse permutation.
+
+
+
+
+
+///////COMPARATOR///////////////   n log(n)
+          to print decending order
+ bool comp(int el1, int el2){
+	if(el1 <= el2){
+		return true;
+	}
+	return false;
+	}
+
+
+bool comp(pair<int,int> el1, pair<int, int> el2){
+	if(el1.first < el2.first){
+		return true;
+	}
+	if(el1.first == el2.first){
+		if(el1.second > el2.second){
+			return true;
+		}
+	}
+	return false;
+}
+
+
+sort(arr,arr+3, comp);
+
+
+	
+
